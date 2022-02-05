@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Digital Medical Representative</string>
+    <string name="doctor">Doctor</string>
+    <string name="medical_representative">Medical Representative</string>
+    <string name="welcome">Welcome</string>
+    <string name="registration_certificate">Select Clinic/hospital Registration Certificate Pic</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

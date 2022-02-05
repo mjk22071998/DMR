@@ -115,6 +115,22 @@
                             android:layout_height="match_parent"
                             android:inputType="textPassword"/>
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/certImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:src="@drawable/ic_image"
+                        android:scaleType="fitCenter"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/select_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cornerRadius="10dp"
+                        android:backgroundTint="@color/green"
+                        android:text="@string/registration_certificate"
+                        android:textColor="@color/black"
+                        android:layout_margin="10dp"/>
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/sign_up"
                         android:layout_width="match_parent"

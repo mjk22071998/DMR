@@ -111,9 +111,15 @@ public class LoginActivity extends AppCompatActivity {
                                                                     SessionManager.saveUser(getApplicationContext(),documentSnapshot.getData());
                                                                     progressDialog.dismiss();
                                                                     if (rep){
-                                                                        startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
+                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Rep"))
+                                                                            startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
+                                                                        else
+                                                                            Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Medical Representative", Toast.LENGTH_SHORT).show();
                                                                     } else {
-                                                                        startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
+                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Doc"))
+                                                                            startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
+                                                                        else
+                                                                            Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Doctor", Toast.LENGTH_SHORT).show();
                                                                     }
                                                                 }
                                                             }).addOnFailureListener(new OnFailureListener() {

@@ -7,8 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
@@ -86,12 +88,16 @@ public class SignUpDocActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_doc);
         init();
+        if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+        }
         selectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ImagePicker.with(SignUpDocActivity.this)
+                Intent intent=ImagePicker.with(SignUpDocActivity.this)
                         .galleryOnly()
                         .createIntent();
+                launcher.launch(intent);
             }
         });
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +116,7 @@ public class SignUpDocActivity extends AppCompatActivity {
                     data.put("Full Name",fullName);
                     data.put("Email",email);
                     data.put("CNIC",cnic);
+                    data.put("Role","Doc");
                     data.put("phoneNumber",phoneNumber);
                     data.put("Address",address);
                     auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(SignUpDocActivity.this, authResult -> {
@@ -122,6 +129,7 @@ public class SignUpDocActivity extends AppCompatActivity {
                                             @Override
                                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                                                 auth.signOut();
+                                                authResult.getUser().sendEmailVerification();
                                                 startActivity(new Intent(SignUpDocActivity.this,LoginActivity.class));
                                                 progressDialog.dismiss();
                                             }

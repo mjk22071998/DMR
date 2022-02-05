@@ -31,7 +31,6 @@ public class SelectUserActivity extends AppCompatActivity {
                 }
                 editor.putBoolean("rep",true);
                 editor.commit();
-                finish();
             }
         });
         doc.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +43,6 @@ public class SelectUserActivity extends AppCompatActivity {
                 }
                 editor.putBoolean("rep",false);
                 editor.commit();
-                finish();
             }
         });
     }

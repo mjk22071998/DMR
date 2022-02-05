@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,SelectUserActivity.class));
                 editor.putBoolean("register",false);
                 editor.commit();
-                finish();
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,SelectUserActivity.class));
                 editor.putBoolean("register",true);
                 editor.commit();
-                finish();
             }
         });
     }

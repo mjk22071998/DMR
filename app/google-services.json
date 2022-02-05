@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1052664656044",
+    "project_id": "digitalmedicalrepresentative",
+    "storage_bucket": "digitalmedicalrepresentative.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052664656044:android:15fe14458bc5def5edef09",
+        "android_client_info": {
+          "package_name": "com.example.dmr.medicalrep"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052664656044-rjc1gplphphdeech5avblh0liofv8hjp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dmr.medicalrep",
+            "certificate_hash": "c776412b9b4d4146af29a6529d29ca5279832d02"
+          }
+        },
+        {
+          "client_id": "1052664656044-23rq7gcbvp45ol846ni4g9b15iq4h5bj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZcTTcyaw4M3AuIrwyg4C42pSTJ3K5ESY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052664656044-23rq7gcbvp45ol846ni4g9b15iq4h5bj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

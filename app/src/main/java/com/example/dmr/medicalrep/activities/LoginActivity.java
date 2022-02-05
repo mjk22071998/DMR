@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dmr.medicalrep.R;
+import com.example.dmr.medicalrep.utils.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
@@ -39,7 +41,22 @@ public class LoginActivity extends AppCompatActivity {
     MaterialButton signIn;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
+    ProgressDialog progressDialog;
     boolean rep;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sharedPreferences=getSharedPreferences("MyFile",MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("auth",false)){
+            rep=sharedPreferences.getBoolean("rep",false);
+            if (rep){
+                startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
+            } else {
+                startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +69,15 @@ public class LoginActivity extends AppCompatActivity {
                 email=emailEt.getText().toString();
                 password=passwordEt.getText().toString();
                 if (validate()){
+                    progressDialog.setMessage("Signing In");
+                    progressDialog.show();
                     auth.signInWithEmailAndPassword(email,password).addOnSuccessListener(LoginActivity.this, new OnSuccessListener<AuthResult>() {
                         @Override
                         public void onSuccess(AuthResult authResult) {
-                            firestore.collection("User").document(authResult.getUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            firestore.collection("Users").document(authResult.getUser().getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(@NonNull DocumentSnapshot documentSnapshot) {
+                                    progressDialog.setMessage("Sending OTP");
                                     PhoneAuthOptions options = PhoneAuthOptions.newBuilder()
                                             .setPhoneNumber("+92" + documentSnapshot.getData().get(PHONE_NUMBER).toString())
                                             .setTimeout(60L, TimeUnit.SECONDS)
@@ -88,6 +108,8 @@ public class LoginActivity extends AppCompatActivity {
                                                                     editor.putBoolean("auth", true);
                                                                     editor.apply();
                                                                     rep=sharedPreferences.getBoolean("rep",false);
+                                                                    SessionManager.saveUser(getApplicationContext(),documentSnapshot.getData());
+                                                                    progressDialog.dismiss();
                                                                     if (rep){
                                                                         startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
                                                                     } else {
@@ -140,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         firestore=FirebaseFirestore.getInstance();
         sharedPreferences=getSharedPreferences("File",MODE_PRIVATE);
         editor=sharedPreferences.edit();
+        progressDialog=new ProgressDialog(this);
     }
 
     boolean validate(){

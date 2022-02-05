@@ -124,22 +124,22 @@
                         android:src="@drawable/ic_image"
                         android:scaleType="fitCenter"
                         android:contentDescription="@string/registration_certificate" />
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/select_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cornerRadius="10dp"
-                        android:backgroundTint="@color/green"
+                        android:background="@drawable/btn_green"
                         android:text="@string/registration_certificate"
                         android:textColor="@color/black"
                         android:layout_margin="10dp"/>
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/sign_up"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cornerRadius="10dp"
+                        android:background="@drawable/btn_shape"
                         android:text="@string/sign_up"
-                        android:textColor="@color/black"
                         android:layout_margin="10dp"
                         android:padding="10dp"/>
                 </LinearLayout>

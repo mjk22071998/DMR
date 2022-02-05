@@ -21,6 +21,7 @@ public class SelectUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_user);
+        init();
         rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

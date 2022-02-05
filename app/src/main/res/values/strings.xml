@@ -4,9 +4,6 @@
     <string name="medical_representative">Medical Representative</string>
     <string name="welcome">Welcome</string>
     <string name="registration_certificate">Select Clinic/hospital Registration Certificate Pic</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="sign_up">Sign Up</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="password">Password</string>

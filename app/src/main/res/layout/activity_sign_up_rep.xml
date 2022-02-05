@@ -116,13 +116,13 @@
                             android:layout_height="match_parent"
                             android:inputType="textPassword"/>
                     </com.google.android.material.textfield.TextInputLayout>
-                    <com.google.android.material.button.MaterialButton
+                    <Button
                         android:id="@+id/sign_up"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cornerRadius="10dp"
-                        android:text="Sign Up"
-                        android:textColor="@color/black"
+                        android:background="@drawable/btn_shape"
+                        android:text="@string/sign_up"
                         android:layout_margin="10dp"
                         android:padding="10dp"/>
                 </LinearLayout>

@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@drawable/bg_sign_up"
     android:layout_height="match_parent"
     android:padding="20dp"
     tools:context=".activities.SignUpDocActivity">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardElevation="15dp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#00000000"
         app:cardCornerRadius="25dp">
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +29,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Full Name"
+                        android:hint="@string/full_name"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_person">
                         <com.google.android.material.textfield.TextInputEditText
@@ -40,7 +41,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Phone Number"
+                        android:hint="@string/phone_number"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_phone">
                         <com.google.android.material.textfield.TextInputEditText
@@ -53,7 +54,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="CNIC (without dashes)"
+                        android:hint="@string/cnic_without_dashes"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_card">
                         <com.google.android.material.textfield.TextInputEditText
@@ -67,7 +68,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Address"
+                        android:hint="@string/address"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_home">
                         <com.google.android.material.textfield.TextInputEditText
@@ -80,7 +81,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email Address"
+                        android:hint="@string/email_address"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_baseline_email_24">
                         <com.google.android.material.textfield.TextInputEditText
@@ -92,7 +93,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
+                        android:hint="@string/password"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_password"
                         app:passwordToggleEnabled="true">
@@ -105,7 +106,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Confirm Password"
+                        android:hint="@string/confirm_password"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_password"
                         app:passwordToggleEnabled="true">
@@ -121,7 +122,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:src="@drawable/ic_image"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="fitCenter"
+                        android:contentDescription="@string/registration_certificate" />
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/select_image"
                         android:layout_width="match_parent"
@@ -136,7 +138,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cornerRadius="10dp"
-                        android:text="Sign Up"
+                        android:text="@string/sign_up"
                         android:textColor="@color/black"
                         android:layout_margin="10dp"
                         android:padding="10dp"/>

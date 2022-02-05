@@ -7,4 +7,12 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="email_address">Email Address</string>
+    <string name="address">Address</string>
+    <string name="cnic_without_dashes">CNIC (without dashes)</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="full_name">Full Name</string>
 </resources>

@@ -39,6 +39,11 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
+    implementation 'com.github.Drjacky:ImagePicker:2.1.15'
+    implementation "io.grpc:grpc-okhttp:1.41.0"
     implementation "com.airbnb.android:lottie:4.2.2"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

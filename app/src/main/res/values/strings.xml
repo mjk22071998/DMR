@@ -15,4 +15,5 @@
     <string name="cnic_without_dashes">CNIC (without dashes)</string>
     <string name="phone_number">Phone Number</string>
     <string name="full_name">Full Name</string>
+    <string name="otp_here">OTP here</string>
 </resources>

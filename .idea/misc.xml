@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1275" />
         <entry key="app/src/main/res/drawable/shape_back.xml" value="0.1275" />
+        <entry key="app/src/main/res/layout/activity_dashboard_rep.xml" value="0.19076923076923077" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.19076923076923077" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="app/src/main/res/layout/activity_select_user.xml" value="0.19375" />

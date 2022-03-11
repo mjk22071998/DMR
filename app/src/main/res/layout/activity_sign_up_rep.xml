@@ -81,6 +81,19 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="@string/city"
+                        android:layout_marginBottom="20dp"
+                        app:startIconDrawable="@drawable/ic_home">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/city"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textMultiLine"
+                            android:minLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:hint="Email Address"
                         android:layout_marginBottom="20dp"
                         app:startIconDrawable="@drawable/ic_baseline_email_24">
@@ -121,6 +134,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:cornerRadius="10dp"
+                        android:textColor="@color/white"
                         android:background="@drawable/btn_shape"
                         android:text="@string/sign_up"
                         android:layout_margin="10dp"

@@ -6,15 +6,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.dmr.medicalrep.R;
+import com.google.android.gms.tasks.OnCanceledListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -54,6 +59,7 @@ public class SignUpRepActivity extends AppCompatActivity {
                 phoneNumber=phoneNumberEt.getText().toString();
                 address=addressEt.getText().toString();
                 cnic=cnicEt.getText().toString();
+                email=emailEt.getText().toString();
                 password=passwordEt.getText().toString();
                 cPassword=cPasswordEt.getText().toString();
                 if (validate()) {
@@ -98,17 +104,37 @@ public class SignUpRepActivity extends AppCompatActivity {
                                                     submitOTP.setOnClickListener(new View.OnClickListener() {
                                                         @Override
                                                         public void onClick(View v) {
+                                                            dialog.dismiss();
+                                                            progressDialog.show();
                                                             PhoneAuthCredential credential=PhoneAuthProvider.getCredential(s, editText.getText().toString());
                                                             auth.getCurrentUser().linkWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                                 @Override
                                                                 public void onSuccess(@NonNull AuthResult authResult) {
-                                                                    auth.signOut();
                                                                     reference.document(email).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                         @Override
                                                                         public void onSuccess(Void unused) {
                                                                             auth.signOut();
                                                                             progressDialog.dismiss();
+                                                                            SharedPreferences sharedPreferences = getSharedPreferences("File", MODE_PRIVATE);
+                                                                            SharedPreferences.Editor editor= sharedPreferences.edit();
+                                                                            editor.putBoolean("rep",true);
+                                                                            editor.apply();
                                                                             startActivity(new Intent(SignUpRepActivity.this,LoginActivity.class));
+                                                                        }
+                                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                                        @Override
+                                                                        public void onFailure(@NonNull Exception e) {
+                                                                            e.printStackTrace();
+                                                                        }
+                                                                    }).addOnCanceledListener(new OnCanceledListener() {
+                                                                        @Override
+                                                                        public void onCanceled() {
+                                                                            Log.v("Cancelled","Cancelled");
+                                                                        }
+                                                                    }).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            Log.v("Task","Complete");
                                                                         }
                                                                     });
                                                                 }
@@ -133,7 +159,14 @@ public class SignUpRepActivity extends AppCompatActivity {
                                             .build();
                             PhoneAuthProvider.verifyPhoneNumber(options);
                         }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            e.printStackTrace();
+                        }
                     });
+                } else {
+                    Log.v("Data validation","Failed");
                 }
             }
         });

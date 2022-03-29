@@ -13,7 +13,6 @@ import com.google.android.material.button.MaterialButton;
 public class SelectUserActivity extends AppCompatActivity {
 
     MaterialButton rep,doc;
-    private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
     boolean reg;
 
@@ -51,8 +50,8 @@ public class SelectUserActivity extends AppCompatActivity {
     void init(){
         rep=findViewById(R.id.med_rep);
         doc=findViewById(R.id.doc);
-        sharedPreferences=getSharedPreferences("File",MODE_PRIVATE);
-        editor=sharedPreferences.edit();
-        reg=sharedPreferences.getBoolean("register",false);
+        SharedPreferences sharedPreferences = getSharedPreferences("File", MODE_PRIVATE);
+        editor= sharedPreferences.edit();
+        reg= sharedPreferences.getBoolean("register",false);
     }
 }

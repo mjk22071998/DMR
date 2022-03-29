@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;
@@ -107,6 +108,7 @@ public class SignUpDocActivity extends AppCompatActivity {
                 phoneNumber=phoneNumberEt.getText().toString();
                 address=addressEt.getText().toString();
                 cnic=cnicEt.getText().toString();
+                email=emailEt.getText().toString();
                 password=passwordEt.getText().toString();
                 cPassword=cPasswordEt.getText().toString();
                 if (validate()){
@@ -153,12 +155,16 @@ public class SignUpDocActivity extends AppCompatActivity {
                                                         auth.getCurrentUser().linkWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                             @Override
                                                             public void onSuccess(@NonNull AuthResult authResult) {
-                                                                auth.signOut();
+
                                                                 reference.document(email).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
                                                                         auth.signOut();
                                                                         progressDialog.dismiss();
+                                                                        SharedPreferences sharedPreferences = getSharedPreferences("File", MODE_PRIVATE);
+                                                                        SharedPreferences.Editor editor= sharedPreferences.edit();
+                                                                        editor.putBoolean("rep",true);
+                                                                        editor.apply();
                                                                         startActivity(new Intent(SignUpDocActivity.this,LoginActivity.class));
                                                                     }
                                                                 });

@@ -15,7 +15,21 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton login,signup;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+    boolean rep;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sharedPreferences=getSharedPreferences("MyFile",MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("auth",false)){
+            rep=sharedPreferences.getBoolean("rep",false);
+            if (rep){
+                startActivity(new Intent(MainActivity.this, DashboardRepActivity.class));
+            } else {
+                startActivity(new Intent(MainActivity.this, DashboardDoctorActivity.class));
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

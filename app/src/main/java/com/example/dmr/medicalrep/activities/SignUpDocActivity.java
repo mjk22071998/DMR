@@ -188,7 +188,7 @@ public class SignUpDocActivity extends AppCompatActivity {
                                             }
                                         })
                                         .build();
-                        StorageReference reference=storage.getReference().child("images/"+ SessionManager.getUser(getApplicationContext()).get(SessionManager.CNIC).toString()+".jpg");
+                        StorageReference reference=storage.getReference().child("images/"+ data.get(SessionManager.CNIC).toString()+".jpg");
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] image = baos.toByteArray();

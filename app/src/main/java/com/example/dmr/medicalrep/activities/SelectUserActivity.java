@@ -24,25 +24,26 @@ public class SelectUserActivity extends AppCompatActivity {
         rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putBoolean("rep",true);
+                editor.commit();
                 if (reg){
                     startActivity(new Intent(SelectUserActivity.this, SignUpRepActivity.class));
                 } else{
                     startActivity(new Intent(SelectUserActivity.this,LoginActivity.class));
                 }
-                editor.putBoolean("rep",true);
-                editor.commit();
             }
         });
         doc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editor.putBoolean("rep",false);
+                editor.commit();
                 if (reg){
                     startActivity(new Intent(SelectUserActivity.this, SignUpDocActivity.class));
                 } else{
                     startActivity(new Intent(SelectUserActivity.this,LoginActivity.class));
                 }
-                editor.putBoolean("rep",false);
-                editor.commit();
+
             }
         });
     }

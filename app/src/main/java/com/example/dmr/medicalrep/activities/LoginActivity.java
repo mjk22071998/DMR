@@ -45,20 +45,6 @@ public class LoginActivity extends AppCompatActivity {
     boolean rep;
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        sharedPreferences=getSharedPreferences("MyFile",MODE_PRIVATE);
-        if (sharedPreferences.getBoolean("auth",false)){
-            rep=sharedPreferences.getBoolean("rep",false);
-            if (rep){
-                startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
-            } else {
-                startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
-            }
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -104,22 +90,32 @@ public class LoginActivity extends AppCompatActivity {
                                                             auth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                                                                 @Override
                                                                 public void onSuccess(@NonNull AuthResult authResult) {
-                                                                    editor = sharedPreferences.edit();
-                                                                    editor.putBoolean("auth", true);
-                                                                    editor.apply();
+
                                                                     rep=sharedPreferences.getBoolean("rep",false);
                                                                     SessionManager.saveUser(getApplicationContext(),documentSnapshot.getData());
                                                                     progressDialog.dismiss();
                                                                     if (rep){
-                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Rep"))
+                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Rep")) {
                                                                             startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
-                                                                        else
+                                                                            editor = sharedPreferences.edit();
+                                                                            editor.putBoolean("auth", true);
+                                                                            editor.apply();
+                                                                        } else {
                                                                             Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Medical Representative", Toast.LENGTH_SHORT).show();
+                                                                            auth.signOut();
+                                                                            SessionManager.deleteUser(LoginActivity.this);
+                                                                        }
                                                                     } else {
-                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Doc"))
+                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Doc")) {
                                                                             startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
-                                                                        else
+                                                                            editor = sharedPreferences.edit();
+                                                                            editor.putBoolean("auth", true);
+                                                                            editor.apply();
+                                                                        } else {
                                                                             Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Doctor", Toast.LENGTH_SHORT).show();
+                                                                            auth.signOut();
+                                                                            SessionManager.deleteUser(LoginActivity.this);
+                                                                        }
                                                                     }
                                                                 }
                                                             }).addOnFailureListener(new OnFailureListener() {
@@ -144,7 +140,8 @@ public class LoginActivity extends AppCompatActivity {
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "User not found as patient", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "User not found", Toast.LENGTH_SHORT).show();
+                                    auth.signOut();
                                 }
                             });
                         }
@@ -152,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             e.printStackTrace();
+                            progressDialog.dismiss();
                             Toast.makeText(LoginActivity.this, "Sign In failed", Toast.LENGTH_SHORT).show();
                         }
                     });

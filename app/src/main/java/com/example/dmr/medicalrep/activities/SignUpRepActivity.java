@@ -39,8 +39,8 @@ import java.util.concurrent.TimeUnit;
 
 public class SignUpRepActivity extends AppCompatActivity {
 
-    TextInputEditText fullNameEt,phoneNumberEt,addressEt,cnicEt,emailEt,passwordEt,cPasswordEt;
-    String fullName,phoneNumber,address,cnic,password,cPassword,email;
+    TextInputEditText fullNameEt,phoneNumberEt,addressEt,cnicEt,emailEt,passwordEt,cPasswordEt,cityEt;
+    String fullName,phoneNumber,address,cnic,password,cPassword,email,city;
     Button signUp;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
@@ -58,6 +58,7 @@ public class SignUpRepActivity extends AppCompatActivity {
                 fullName=fullNameEt.getText().toString();
                 phoneNumber=phoneNumberEt.getText().toString();
                 address=addressEt.getText().toString();
+                city=cityEt.getText().toString();
                 cnic=cnicEt.getText().toString();
                 email=emailEt.getText().toString();
                 password=passwordEt.getText().toString();
@@ -71,6 +72,7 @@ public class SignUpRepActivity extends AppCompatActivity {
                     data.put("CNIC", cnic);
                     data.put("Role","Rep");
                     data.put("phoneNumber", phoneNumber);
+                    data.put("City",city);
                     data.put("Address", address);
                     auth.createUserWithEmailAndPassword(email,password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                         @Override
@@ -198,7 +200,11 @@ public class SignUpRepActivity extends AppCompatActivity {
         } else if (address.isEmpty()){
             addressEt.setError("Please enter your address");
             return false;
-        } else if (phoneNumber.isEmpty()||phoneNumber.length()<11){
+        } else if (city.isEmpty()){
+            cityEt.setError("Please enter your city");
+            cityEt.requestFocus();
+            return false;
+        }else if (phoneNumber.isEmpty()||phoneNumber.length()<11){
             phoneNumberEt.setError("Please enter your phone Number");
             phoneNumberEt.requestFocus();
             return false;

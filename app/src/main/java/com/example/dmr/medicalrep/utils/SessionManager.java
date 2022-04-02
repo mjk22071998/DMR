@@ -13,6 +13,7 @@ public class SessionManager {
     public static final String CNIC="CNIC";
     public static final String FULL_NAME="Full Name";
     public static final String ADDRESS="Address";
+    public static final String CITY="City";
     public static final String EMAIL="Email";
     public static final String PHONE_NUMBER="phoneNumber";
 
@@ -22,6 +23,7 @@ public class SessionManager {
         editor.putString(CNIC,map.get(CNIC).toString());
         editor.putString(FULL_NAME,map.get(FULL_NAME).toString());
         editor.putString(ADDRESS,map.get(ADDRESS).toString());
+        editor.putString(CITY,map.get(CITY).toString());
         editor.putString(EMAIL,map.get(EMAIL).toString());
         editor.putString(PHONE_NUMBER,map.get(PHONE_NUMBER).toString());
         editor.apply();
@@ -34,6 +36,7 @@ public class SessionManager {
         map.put(FULL_NAME,sharepref.getString(FULL_NAME,""));
         map.put(CNIC,sharepref.getString(CNIC,""));
         map.put(ADDRESS,sharepref.getString(ADDRESS,""));
+        map.put(CITY,sharepref.getString(CITY,""));
         map.put(EMAIL,sharepref.getString(EMAIL,""));
         map.put(PHONE_NUMBER,sharepref.getString(PHONE_NUMBER,""));
         return map;
@@ -46,6 +49,7 @@ public class SessionManager {
         editor.putString(FULL_NAME,"");
         editor.putString(ADDRESS,"");
         editor.putString(EMAIL,"");
+        editor.putString(CITY,"");
         editor.putString(PHONE_NUMBER,"");
         editor.apply();
     }

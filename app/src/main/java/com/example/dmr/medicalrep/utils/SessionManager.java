@@ -11,7 +11,7 @@ import java.util.Map;
 public class SessionManager {
 
     public static final String CNIC="CNIC";
-    public static final String FULL_NAME="Full Name";
+    public static final String FULL_NAME="fullName";
     public static final String ADDRESS="Address";
     public static final String CITY="City";
     public static final String EMAIL="Email";

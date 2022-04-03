@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.dmr.medicalrep.R;
 
-public class RequestsActivity extends AppCompatActivity {
+public class SendRequestActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_requests);
+        setContentView(R.layout.activity_send_request);
     }
 }

@@ -15,11 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalRep">
         <activity
-            android:name=".activities.SearchDoctorsActivity"
-            android:exported="false" />
+            android:name=".activities.SendRequestActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.SearchDoctorsActivity"/>
         <activity
-            android:name=".activities.RequestsActivity"
-            android:exported="false" />
+            android:name=".activities.SearchDoctorsActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.DashboardRepActivity" />
+        <activity
+            android:name=".activities.RequestsRepActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.DashboardRepActivity" />
         <activity
             android:name=".activities.DashboardRepActivity"
             android:exported="false" />

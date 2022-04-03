@@ -15,16 +15,22 @@
         <entry key="app/src/main/res/layout/activity_dashboard_rep.xml" value="0.19076923076923077" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.19076923076923077" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_requests.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_requests_rep.xml" value="0.19076923076923077" />
         <entry key="app/src/main/res/layout/activity_search_doctors.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_select_user.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_sign_up_doc.xml" value="0.19076923076923077" />
         <entry key="app/src/main/res/layout/activity_sign_up_rep.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.17864583333333334" />
         <entry key="app/src/main/res/layout/content_request.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/fragment_accepted.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_rejected.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_requests.xml" value="0.17864583333333334" />
+        <entry key="app/src/main/res/layout/fragment_sent.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_doctor.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/item_filters.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_otp.xml" value="0.19076923076923077" />
+        <entry key="app/src/main/res/layout/item_request.xml" value="0.19375" />
         <entry key="app/src/main/res/menu/search_doctor.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1275" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1275" />

@@ -14,4 +14,6 @@
     <string name="full_name">Full Name</string>
     <string name="otp_here">OTP here</string>
     <string name="city">City</string>
+    <string name="filter_doctors">Filter Doctors</string>
+    <string name="doctor_name">Doctor Name</string>
 </resources>

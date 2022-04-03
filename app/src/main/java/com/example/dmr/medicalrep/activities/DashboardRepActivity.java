@@ -40,7 +40,18 @@ public class DashboardRepActivity extends AppCompatActivity{
                 finishAffinity();
             }
         });
-
+        sendRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardRepActivity.this, SearchDoctorsActivity.class));
+            }
+        });
+        request.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardRepActivity.this, RequestsRepActivity.class));
+            }
+        });
     }
 
     void init(){

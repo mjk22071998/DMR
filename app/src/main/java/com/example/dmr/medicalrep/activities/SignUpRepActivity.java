@@ -67,7 +67,7 @@ public class SignUpRepActivity extends AppCompatActivity {
                     progressDialog.setMessage("Signing Up");
                     progressDialog.show();
                     Map<String, Object> data = new HashMap<>();
-                    data.put("Full Name", fullName);
+                    data.put("fullName", fullName);
                     data.put("Email", email);
                     data.put("CNIC", cnic);
                     data.put("Role","Rep");
@@ -115,12 +115,14 @@ public class SignUpRepActivity extends AppCompatActivity {
                                                                     reference.document(email).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                         @Override
                                                                         public void onSuccess(Void unused) {
+                                                                            authResult.getUser().sendEmailVerification();
                                                                             auth.signOut();
                                                                             progressDialog.dismiss();
                                                                             SharedPreferences sharedPreferences = getSharedPreferences("File", MODE_PRIVATE);
                                                                             SharedPreferences.Editor editor= sharedPreferences.edit();
                                                                             editor.putBoolean("rep",true);
                                                                             editor.apply();
+                                                                            Toast.makeText(SignUpRepActivity.this, "A verification email has been sent", Toast.LENGTH_SHORT).show();
                                                                             startActivity(new Intent(SignUpRepActivity.this,LoginActivity.class));
                                                                         }
                                                                     }).addOnFailureListener(new OnFailureListener() {
@@ -182,6 +184,7 @@ public class SignUpRepActivity extends AppCompatActivity {
         addressEt =findViewById(R.id.address);
         phoneNumberEt =findViewById(R.id.phone_number);
         emailEt =findViewById(R.id.email);
+        cityEt=findViewById(R.id.city);
         passwordEt =findViewById(R.id.password);
         cPasswordEt =findViewById(R.id.confirm_password);
         signUp=findViewById(R.id.sign_up);

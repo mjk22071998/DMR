@@ -41,4 +41,8 @@
         <item name="fullscreenBackgroundColor">@color/white</item>
         <item name="fullscreenTextColor">@color/black</item>
     </style>
+
+    <style name="Theme.MedicalRep.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MedicalRep.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

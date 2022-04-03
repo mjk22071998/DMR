@@ -51,8 +51,8 @@ import java.util.concurrent.TimeUnit;
 
 public class SignUpDocActivity extends AppCompatActivity {
 
-    TextInputEditText fullNameEt,phoneNumberEt,addressEt,cnicEt,emailEt,passwordEt,cPasswordEt;
-    String fullName,phoneNumber,address,cnic,password,cPassword,email;
+    TextInputEditText fullNameEt,phoneNumberEt,addressEt,cnicEt,emailEt,passwordEt,cPasswordEt,cityEt;
+    String fullName,phoneNumber,address,cnic,password,cPassword,email,city;
     ImageView cert;
     Bitmap bitmap;
     Button selectImage,signUp;
@@ -108,6 +108,7 @@ public class SignUpDocActivity extends AppCompatActivity {
                 phoneNumber=phoneNumberEt.getText().toString();
                 address=addressEt.getText().toString();
                 cnic=cnicEt.getText().toString();
+                city=cityEt.getText().toString();
                 email=emailEt.getText().toString();
                 password=passwordEt.getText().toString();
                 cPassword=cPasswordEt.getText().toString();
@@ -115,8 +116,9 @@ public class SignUpDocActivity extends AppCompatActivity {
                     progressDialog.setMessage("Signing Up");
                     progressDialog.show();
                     Map<String,Object> data=new HashMap<>();
-                    data.put("Full Name",fullName);
+                    data.put("fullName",fullName);
                     data.put("Email",email);
+                    data.put("City",city);
                     data.put("CNIC",cnic);
                     data.put("Role","Doc");
                     data.put("phoneNumber",phoneNumber);
@@ -130,9 +132,9 @@ public class SignUpDocActivity extends AppCompatActivity {
                                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                                             @Override
                                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                                auth.signOut();
                                                 authResult.getUser().sendEmailVerification();
                                                 startActivity(new Intent(SignUpDocActivity.this,LoginActivity.class));
+                                                auth.signOut();
                                                 progressDialog.dismiss();
                                             }
 
@@ -159,11 +161,13 @@ public class SignUpDocActivity extends AppCompatActivity {
                                                                 reference.document(email).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                     @Override
                                                                     public void onSuccess(Void unused) {
+                                                                        authResult.getUser().sendEmailVerification();
                                                                         auth.signOut();
                                                                         progressDialog.dismiss();
                                                                         SharedPreferences sharedPreferences = getSharedPreferences("File", MODE_PRIVATE);
                                                                         SharedPreferences.Editor editor= sharedPreferences.edit();
-                                                                        editor.putBoolean("rep",true);
+                                                                        editor.putBoolean("rep",false);
+                                                                        Toast.makeText(SignUpDocActivity.this, "A verification email has been sent", Toast.LENGTH_SHORT).show();
                                                                         editor.apply();
                                                                         startActivity(new Intent(SignUpDocActivity.this,LoginActivity.class));
                                                                     }
@@ -206,7 +210,7 @@ public class SignUpDocActivity extends AppCompatActivity {
                             }
                         });
                     }).addOnFailureListener(SignUpDocActivity.this, e -> {
-
+                        e.printStackTrace();
                     });
                 }
             }
@@ -224,6 +228,7 @@ public class SignUpDocActivity extends AppCompatActivity {
         phoneNumberEt =findViewById(R.id.phone_number);
         emailEt =findViewById(R.id.email);
         storage=FirebaseStorage.getInstance();
+        cityEt=findViewById(R.id.city);
         passwordEt =findViewById(R.id.password);
         cPasswordEt =findViewById(R.id.confirm_password);
         signUp=findViewById(R.id.sign_up);
@@ -242,6 +247,11 @@ public class SignUpDocActivity extends AppCompatActivity {
             return false;
         } else if (address.isEmpty()){
             addressEt.setError("Please enter your address");
+            addressEt.requestFocus();
+            return false;
+        }else if (city.isEmpty()){
+            cityEt.setError("Please enter your address");
+            cityEt.requestFocus();
             return false;
         } else if (phoneNumber.isEmpty()||phoneNumber.length()<11){
             phoneNumberEt.setError("Please enter your phone Number");

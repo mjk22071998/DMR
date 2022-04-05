@@ -12,13 +12,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.dmr.medicalrep.R;
 import com.example.dmr.medicalrep.utils.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.FirebaseException;
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     String email,password;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    MaterialButton signIn;
+    Button signIn;
     FirebaseAuth auth;
     FirebaseFirestore firestore;
     ProgressDialog progressDialog;
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(LoginActivity.this);
                                                     View view = getLayoutInflater().inflate(R.layout.item_otp, null, false);
                                                     builder.setView(view);
-                                                    MaterialButton submitOTP = view.findViewById(R.id.verifyOTP);
+                                                    Button submitOTP = view.findViewById(R.id.verifyOTP);
                                                     TextInputEditText editText = view.findViewById(R.id.otp);
                                                     dialog = builder.create();
                                                     dialog.show();

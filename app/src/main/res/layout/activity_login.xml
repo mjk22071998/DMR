@@ -66,12 +66,12 @@
                     android:textStyle="bold"
                     android:padding="5dp"
                     android:layout_gravity="end"/>
-                <com.google.android.material.button.MaterialButton
+                <Button
                     android:id="@+id/sign_in"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cornerRadius="15dp"
                     android:text="Sign In"
+                    android:background="@drawable/btn_shape"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:layout_margin="10dp"

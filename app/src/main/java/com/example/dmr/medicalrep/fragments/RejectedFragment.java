@@ -2,6 +2,7 @@ package com.example.dmr.medicalrep.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -24,6 +25,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class RejectedFragment extends Fragment {
@@ -32,6 +35,7 @@ public class RejectedFragment extends Fragment {
     RecyclerView rejected;
     SharedPreferences sharedPreferences;
     Task<QuerySnapshot> task;
+    ProgressDialog progressDialog;
     List<Request> requests;
 
     public RejectedFragment() {
@@ -42,6 +46,7 @@ public class RejectedFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_rejected, container, false);
         rejected=view.findViewById(R.id.reject);
+        progressDialog.show();
         sharedPreferences=getActivity().getSharedPreferences("File",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
             task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Rejected").get();
@@ -52,6 +57,12 @@ public class RejectedFragment extends Fragment {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 requests=queryDocumentSnapshots.toObjects(Request.class);
+                Collections.sort(requests, new Comparator<Request>() {
+                    @Override
+                    public int compare(Request request, Request t1) {
+                        return request.getTimestamp().compareTo(t1.getTimestamp());
+                    }
+                });
                 updateUI();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -66,5 +77,6 @@ public class RejectedFragment extends Fragment {
     void updateUI(){
         rejected.setAdapter(new RequestAdapter(requests));
         rejected.setLayoutManager(new LinearLayoutManager(getContext()));
+        progressDialog.dismiss();
     }
 }

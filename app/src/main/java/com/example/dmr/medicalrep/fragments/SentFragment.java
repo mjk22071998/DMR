@@ -1,5 +1,6 @@
 package com.example.dmr.medicalrep.fragments;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -22,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -29,8 +32,8 @@ public class SentFragment extends Fragment {
 
     FirebaseFirestore firestore;
     RecyclerView sent;
-    SharedPreferences sharedPreferences;
     List<Request> requests;
+    ProgressDialog progressDialog;
 
     public SentFragment() {
         // Required empty public constructor
@@ -41,10 +44,18 @@ public class SentFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_sent, container, false);
         sent=view.findViewById(R.id.sent);
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.show();
         firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Sent").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 requests=queryDocumentSnapshots.toObjects(Request.class);
+                Collections.sort(requests, new Comparator<Request>() {
+                    @Override
+                    public int compare(Request request, Request t1) {
+                        return request.getTimestamp().compareTo(t1.getTimestamp());
+                    }
+                });
                 updateUI();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -59,5 +70,6 @@ public class SentFragment extends Fragment {
     void updateUI(){
         sent.setAdapter(new RequestAdapter(requests));
         sent.setLayoutManager(new LinearLayoutManager(getContext()));
+        progressDialog.dismiss();
     }
 }

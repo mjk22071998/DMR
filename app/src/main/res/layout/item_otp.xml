@@ -22,11 +22,13 @@
                 android:digits="1234567890"
                 android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/verifyOTP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Verify OTP"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_shape"
             android:layout_marginTop="10dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

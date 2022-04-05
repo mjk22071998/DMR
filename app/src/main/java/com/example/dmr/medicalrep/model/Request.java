@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Request {
     String to;
+    String id;
     String from;
     Timestamp timestamp;
     String status;
@@ -16,14 +17,13 @@ public class Request {
     public Request() {
     }
 
-    public Request(String to, String from, Timestamp timestamp, String status, String docName, String repName, List<Medicine> medicines) {
-        this.to = to;
-        this.from = from;
-        this.timestamp = timestamp;
-        this.status = status;
-        this.docName = docName;
-        this.repName = repName;
-        this.medicines = medicines;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getDocName() {

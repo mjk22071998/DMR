@@ -15,9 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalRep">
         <activity
+            android:name=".activities.RequestDocActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.SendRequestActivity"
             android:exported="false"
-            android:parentActivityName=".activities.SearchDoctorsActivity"/>
+            android:parentActivityName=".activities.SearchDoctorsActivity" />
         <activity
             android:name=".activities.SearchDoctorsActivity"
             android:exported="false"

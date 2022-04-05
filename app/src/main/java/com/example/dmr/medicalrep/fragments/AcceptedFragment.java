@@ -2,6 +2,7 @@ package com.example.dmr.medicalrep.fragments;
 
 import static android.content.Context.MODE_PRIVATE;
 
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -24,6 +25,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class AcceptedFragment extends Fragment {
@@ -33,6 +36,7 @@ public class AcceptedFragment extends Fragment {
     SharedPreferences sharedPreferences;
     Task<QuerySnapshot> task;
     List<Request> requests;
+    ProgressDialog progressDialog;
 
     public AcceptedFragment() {
         // Required empty public constructor
@@ -43,6 +47,8 @@ public class AcceptedFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_accepted, container, false);
         accepted=view.findViewById(R.id.accept);
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.show();
         sharedPreferences=getActivity().getSharedPreferences("MyFile",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
             task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
@@ -53,6 +59,12 @@ public class AcceptedFragment extends Fragment {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 requests=queryDocumentSnapshots.toObjects(Request.class);
+                Collections.sort(requests, new Comparator<Request>() {
+                    @Override
+                    public int compare(Request request, Request t1) {
+                        return request.getTimestamp().compareTo(t1.getTimestamp());
+                    }
+                });
                 updateUI();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -67,5 +79,6 @@ public class AcceptedFragment extends Fragment {
     void updateUI(){
         accepted.setAdapter(new RequestAdapter(requests));
         accepted.setLayoutManager(new LinearLayoutManager(getContext()));
+        progressDialog.dismiss();
     }
 }

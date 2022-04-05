@@ -16,4 +16,9 @@
     <string name="city">City</string>
     <string name="filter_doctors">Filter Doctors</string>
     <string name="doctor_name">Doctor Name</string>
+    <string name="medicine_name">Medicine Name</string>
+    <string name="potency">Potency e.g: 50mg, 250 mg etc</string>
+    <string name="description">Description</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

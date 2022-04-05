@@ -49,7 +49,7 @@ public class AcceptedFragment extends Fragment {
         accepted=view.findViewById(R.id.accept);
         progressDialog=new ProgressDialog(getContext());
         progressDialog.show();
-        sharedPreferences=getActivity().getSharedPreferences("MyFile",MODE_PRIVATE);
+        sharedPreferences=getActivity().getSharedPreferences("File",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
             task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
         } else {

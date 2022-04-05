@@ -45,6 +45,29 @@
                 android:textSize="17.5sp"
                 android:text="To"/>
         </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textSize="17.5sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Time"/>
+            <TextView
+                android:id="@+id/time"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="17.5sp"
+                android:text="To"/>
+        </TableRow>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/meds"
+            android:nestedScrollingEnabled="false"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
     </TableLayout>
 
 </androidx.cardview.widget.CardView>

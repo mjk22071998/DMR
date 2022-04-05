@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dmr.medicalrep.R;
+import com.example.dmr.medicalrep.adapters.RequestAdapter;
 import com.example.dmr.medicalrep.model.Request;
 import com.example.dmr.medicalrep.utils.SessionManager;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -43,9 +45,9 @@ public class AcceptedFragment extends Fragment {
         accepted=view.findViewById(R.id.accept);
         sharedPreferences=getActivity().getSharedPreferences("MyFile",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
-            task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accept").get();
+            task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
         } else {
-            task = firestore.collection("Request").whereEqualTo("to", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accept").get();
+            task = firestore.collection("Request").whereEqualTo("to", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
         }
         task.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -63,6 +65,7 @@ public class AcceptedFragment extends Fragment {
     }
 
     void updateUI(){
-
+        accepted.setAdapter(new RequestAdapter(requests));
+        accepted.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 }

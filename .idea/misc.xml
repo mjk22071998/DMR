@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/fragment_sent.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_doctor.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/item_filters.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_medicines.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/item_otp.xml" value="0.19076923076923077" />
         <entry key="app/src/main/res/layout/item_request.xml" value="0.19375" />
         <entry key="app/src/main/res/menu/search_doctor.xml" value="0.1" />

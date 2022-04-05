@@ -9,8 +9,8 @@ import com.example.dmr.medicalrep.fragments.AcceptedFragment;
 import com.example.dmr.medicalrep.fragments.RejectedFragment;
 import com.example.dmr.medicalrep.fragments.SentFragment;
 
-public class RequestStateAdapter extends FragmentStateAdapter {
-    public RequestStateAdapter(@NonNull FragmentActivity fragmentActivity) {
+public class RequestRepStateAdapter extends FragmentStateAdapter {
+    public RequestRepStateAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 

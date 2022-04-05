@@ -16,7 +16,8 @@
         android:theme="@style/Theme.MedicalRep">
         <activity
             android:name=".activities.RequestDocActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activities.DashboardDoctorActivity"/>
         <activity
             android:name=".activities.SendRequestActivity"
             android:exported="false"

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -47,7 +48,10 @@ public class SearchDoctorsActivity extends AppCompatActivity {
                 adapter.setOnDoctorClickListener(new DoctorAdapter.OnDoctorClickListener() {
                     @Override
                     public void onClick(int position) {
-                        //TODO: SOON
+                        Intent intent=new Intent(SearchDoctorsActivity.this,SendRequestActivity.class);
+                        intent.putExtra("docName", doctors.get(position).getFullName());
+                        intent.putExtra("docCNIC", doctors.get(position).getCNIC());
+                        startActivity(intent);
                     }
                 });
             }

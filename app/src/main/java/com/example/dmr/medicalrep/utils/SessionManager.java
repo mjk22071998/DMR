@@ -16,6 +16,14 @@ public class SessionManager {
     public static final String CITY="City";
     public static final String EMAIL="Email";
     public static final String PHONE_NUMBER="phoneNumber";
+    public static final String TOKEN="token";
+
+    public static void saveToken(Context context,String s){
+        SharedPreferences sharepref=context.getSharedPreferences("MyFile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor =sharepref.edit();
+        editor.putString(TOKEN,s);
+        editor.apply();
+    }
 
     public static void saveUser(@NonNull Context context, @NonNull Map<String,Object> map){
         SharedPreferences sharepref=context.getSharedPreferences("MyFile", Context.MODE_PRIVATE);

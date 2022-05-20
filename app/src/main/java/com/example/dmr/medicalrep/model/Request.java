@@ -13,6 +13,24 @@ public class Request {
     String docName;
     String repName;
     List<Medicine> medicines;
+    String repToken;
+    String docToken;
+
+    public String getRepToken() {
+        return repToken;
+    }
+
+    public void setRepToken(String repToken) {
+        this.repToken = repToken;
+    }
+
+    public String getDocToken() {
+        return docToken;
+    }
+
+    public void setDocToken(String docToken) {
+        this.docToken = docToken;
+    }
 
     public Request() {
     }

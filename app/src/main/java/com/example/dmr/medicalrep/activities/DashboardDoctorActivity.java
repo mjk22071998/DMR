@@ -40,6 +40,12 @@ public class DashboardDoctorActivity extends AppCompatActivity {
         request.setOnClickListener(view -> startActivity(new Intent(DashboardDoctorActivity.this, RequestDocActivity.class)));
         messages.setOnClickListener(view -> startActivity(new Intent(DashboardDoctorActivity.this, ChatActivity.class)));
     }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
+
     void init(){
         request=findViewById(R.id.request);
         messages=findViewById(R.id.message);

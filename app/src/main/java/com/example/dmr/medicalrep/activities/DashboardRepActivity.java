@@ -58,4 +58,9 @@ public class DashboardRepActivity extends AppCompatActivity{
         logout=findViewById(R.id.logout);
         auth=FirebaseAuth.getInstance();
     }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+    }
 }

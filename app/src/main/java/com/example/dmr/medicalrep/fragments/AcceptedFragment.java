@@ -43,36 +43,29 @@ public class AcceptedFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_accepted, container, false);
         accepted=view.findViewById(R.id.accept);
         progressDialog=new ProgressDialog(getContext());
         progressDialog.show();
+        firestore=FirebaseFirestore.getInstance();
         sharedPreferences=getActivity().getSharedPreferences("File",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
             task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
         } else {
             task = firestore.collection("Request").whereEqualTo("to", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
         }
-        task.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                requests=queryDocumentSnapshots.toObjects(Request.class);
-                Collections.sort(requests, new Comparator<Request>() {
-                    @Override
-                    public int compare(Request request, Request t1) {
-                        return request.getTimestamp().compareTo(t1.getTimestamp());
-                    }
-                });
-                updateUI();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                e.printStackTrace();
-            }
-        });
+        task.addOnSuccessListener(queryDocumentSnapshots -> {
+            requests=queryDocumentSnapshots.toObjects(Request.class);
+            Collections.sort(requests, new Comparator<Request>() {
+                @Override
+                public int compare(Request request, Request t1) {
+                    return request.getTimestamp().compareTo(t1.getTimestamp());
+                }
+            });
+            updateUI();
+        }).addOnFailureListener(e -> e.printStackTrace());
         return view;
     }
 

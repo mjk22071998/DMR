@@ -100,7 +100,7 @@ public class SignUpRepActivity extends AppCompatActivity {
                                                     MaterialAlertDialogBuilder builder=new MaterialAlertDialogBuilder(SignUpRepActivity.this);
                                                     View view=getLayoutInflater().inflate(R.layout.item_otp,null,false);
                                                     builder.setView(view);
-                                                    MaterialButton submitOTP=view.findViewById(R.id.verifyOTP);
+                                                    Button submitOTP=view.findViewById(R.id.verifyOTP);
                                                     TextInputEditText editText=view.findViewById(R.id.otp);
                                                     dialog=builder.create();
                                                     dialog.show();

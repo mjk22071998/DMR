@@ -45,6 +45,20 @@ public class LoginActivity extends AppCompatActivity {
     boolean rep;
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        sharedPreferences=getSharedPreferences("File",MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("auth",false)){
+            rep=sharedPreferences.getBoolean("rep",false);
+            if (rep){
+                startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
+            } else {
+                startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
+            }
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -87,43 +101,35 @@ public class LoginActivity extends AppCompatActivity {
                                                         @Override
                                                         public void onClick(View v) {
                                                             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(s, editText.getText().toString());
-                                                            auth.signInWithCredential(credential).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                                                @Override
-                                                                public void onSuccess(@NonNull AuthResult authResult) {
+                                                            auth.signInWithCredential(credential).addOnSuccessListener(authResult1 -> {
 
-                                                                    rep=sharedPreferences.getBoolean("rep",false);
-                                                                    SessionManager.saveUser(getApplicationContext(),documentSnapshot.getData());
-                                                                    progressDialog.dismiss();
-                                                                    if (rep){
-                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Rep")) {
-                                                                            startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
-                                                                            editor = sharedPreferences.edit();
-                                                                            editor.putBoolean("auth", true);
-                                                                            editor.apply();
-                                                                        } else {
-                                                                            Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Medical Representative", Toast.LENGTH_SHORT).show();
-                                                                            auth.signOut();
-                                                                            SessionManager.deleteUser(LoginActivity.this);
-                                                                        }
+                                                                rep=sharedPreferences.getBoolean("rep",false);
+                                                                SessionManager.saveUser(getApplicationContext(),documentSnapshot.getData());
+                                                                progressDialog.dismiss();
+                                                                if (rep){
+                                                                    if(documentSnapshot.getData().get("Role").toString().equals("Rep")) {
+                                                                        startActivity(new Intent(LoginActivity.this, DashboardRepActivity.class));
+                                                                        editor = sharedPreferences.edit();
+                                                                        editor.putBoolean("auth", true);
+                                                                        editor.apply();
                                                                     } else {
-                                                                        if(documentSnapshot.getData().get("Role").toString().equals("Doc")) {
-                                                                            startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
-                                                                            editor = sharedPreferences.edit();
-                                                                            editor.putBoolean("auth", true);
-                                                                            editor.apply();
-                                                                        } else {
-                                                                            Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Doctor", Toast.LENGTH_SHORT).show();
-                                                                            auth.signOut();
-                                                                            SessionManager.deleteUser(LoginActivity.this);
-                                                                        }
+                                                                        Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Medical Representative", Toast.LENGTH_SHORT).show();
+                                                                        auth.signOut();
+                                                                        SessionManager.deleteUser(LoginActivity.this);
+                                                                    }
+                                                                } else {
+                                                                    if(documentSnapshot.getData().get("Role").toString().equals("Doc")) {
+                                                                        startActivity(new Intent(LoginActivity.this, DashboardDoctorActivity.class));
+                                                                        editor = sharedPreferences.edit();
+                                                                        editor.putBoolean("auth", true);
+                                                                        editor.apply();
+                                                                    } else {
+                                                                        Toast.makeText(LoginActivity.this, "Sorry! this account is not found as Doctor", Toast.LENGTH_SHORT).show();
+                                                                        auth.signOut();
+                                                                        SessionManager.deleteUser(LoginActivity.this);
                                                                     }
                                                                 }
-                                                            }).addOnFailureListener(new OnFailureListener() {
-                                                                @Override
-                                                                public void onFailure(@NonNull Exception e) {
-                                                                    Toast.makeText(getApplicationContext(), "Phone Number Not verified", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            });
+                                                            }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), "Phone Number Not verified", Toast.LENGTH_SHORT).show());
                                                         }
                                                     });
                                                 }
@@ -131,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 public void onVerificationFailed(@NonNull FirebaseException e) {
                                                     e.printStackTrace();
                                                     Toast.makeText(LoginActivity.this, "Phone number verification failed", Toast.LENGTH_SHORT).show();
-                                                    authResult.getUser().delete();
+                                                    auth.signOut();
                                                 }
                                             })
                                             .build();

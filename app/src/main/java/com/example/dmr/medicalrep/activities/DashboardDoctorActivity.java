@@ -32,26 +32,13 @@ public class DashboardDoctorActivity extends AppCompatActivity {
         name.setText(SessionManager.getUser(getApplicationContext()).get(FULL_NAME).toString());
         phoneNumber.setText(SessionManager.getUser(getApplicationContext()).get(PHONE_NUMBER).toString());
         city.setText(SessionManager.getUser(getApplicationContext()).get(CITY).toString());
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth.signOut();
-                startActivity(new Intent(DashboardDoctorActivity.this,MainActivity.class));
-                finishAffinity();
-            }
+        logout.setOnClickListener(view -> {
+            auth.signOut();
+            startActivity(new Intent(DashboardDoctorActivity.this,MainActivity.class));
+            finishAffinity();
         });
-        request.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DashboardDoctorActivity.this, RequestDocActivity.class));
-            }
-        });
-        messages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DashboardDoctorActivity.this, ChatActivity.class));
-            }
-        });
+        request.setOnClickListener(view -> startActivity(new Intent(DashboardDoctorActivity.this, RequestDocActivity.class)));
+        messages.setOnClickListener(view -> startActivity(new Intent(DashboardDoctorActivity.this, ChatActivity.class)));
     }
     void init(){
         request=findViewById(R.id.request);

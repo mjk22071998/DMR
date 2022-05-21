@@ -50,6 +50,7 @@ public class NewFragment extends Fragment {
         progressDialog=new ProgressDialog(getContext());
         progressDialog.show();
         requests=new ArrayList<>();
+        firestore=FirebaseFirestore.getInstance();
         getData();
         return view;
     }

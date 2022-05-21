@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        sharedPreferences=getSharedPreferences("MyFile",MODE_PRIVATE);
+        sharedPreferences=getSharedPreferences("File",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("auth",false)){
             rep=sharedPreferences.getBoolean("rep",false);
             if (rep){
@@ -35,21 +35,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SelectUserActivity.class));
-                editor.putBoolean("register",false);
-                editor.commit();
-            }
+        login.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this,SelectUserActivity.class));
+            editor.putBoolean("register",false);
+            editor.commit();
         });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,SelectUserActivity.class));
-                editor.putBoolean("register",true);
-                editor.commit();
-            }
+        signup.setOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this,SelectUserActivity.class));
+            editor.putBoolean("register",true);
+            editor.commit();
         });
     }
 

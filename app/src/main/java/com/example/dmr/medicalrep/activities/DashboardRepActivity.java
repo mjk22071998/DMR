@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,32 +33,19 @@ public class DashboardRepActivity extends AppCompatActivity{
         name.setText(SessionManager.getUser(getApplicationContext()).get(FULL_NAME).toString());
         phoneNumber.setText(SessionManager.getUser(getApplicationContext()).get(PHONE_NUMBER).toString());
         city.setText(SessionManager.getUser(getApplicationContext()).get(CITY).toString());
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                auth.signOut();
-                startActivity(new Intent(DashboardRepActivity.this,MainActivity.class));
-                finishAffinity();
-            }
+        logout.setOnClickListener(view -> {
+            auth.signOut();
+            startActivity(new Intent(DashboardRepActivity.this,MainActivity.class));
+            finishAffinity();
+            SessionManager.deleteUser(getApplicationContext());
+            SharedPreferences sharedPreferences=getSharedPreferences("File",MODE_PRIVATE);
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean("auth",false);
+            editor.apply();
         });
-        messages.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DashboardRepActivity.this, ChatActivity.class));
-            }
-        });
-        sendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DashboardRepActivity.this, SearchDoctorsActivity.class));
-            }
-        });
-        request.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(DashboardRepActivity.this, RequestsRepActivity.class));
-            }
-        });
+        messages.setOnClickListener(view -> startActivity(new Intent(DashboardRepActivity.this, ChatActivity.class)));
+        sendRequest.setOnClickListener(view -> startActivity(new Intent(DashboardRepActivity.this, SearchDoctorsActivity.class)));
+        request.setOnClickListener(view -> startActivity(new Intent(DashboardRepActivity.this, RequestsRepActivity.class)));
     }
 
     void init(){

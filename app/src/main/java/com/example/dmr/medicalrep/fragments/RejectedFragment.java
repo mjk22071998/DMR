@@ -46,7 +46,9 @@ public class RejectedFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_rejected, container, false);
         rejected=view.findViewById(R.id.reject);
+        progressDialog=new ProgressDialog(getContext());
         progressDialog.show();
+        firestore=FirebaseFirestore.getInstance();
         sharedPreferences=getActivity().getSharedPreferences("File",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
             task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Rejected").get();

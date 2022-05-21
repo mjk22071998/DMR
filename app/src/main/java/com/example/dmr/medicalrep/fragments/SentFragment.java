@@ -46,6 +46,7 @@ public class SentFragment extends Fragment {
         sent=view.findViewById(R.id.sent);
         progressDialog=new ProgressDialog(getContext());
         progressDialog.show();
+        firestore=FirebaseFirestore.getInstance();
         firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Sent").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {

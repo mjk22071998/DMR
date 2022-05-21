@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
 
 import com.example.dmr.medicalrep.R;
+import com.example.dmr.medicalrep.adapters.RequestRepStateAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -20,6 +21,7 @@ public class RequestsRepActivity extends AppCompatActivity {
         setContentView(R.layout.activity_requests_rep);
         tabLayout=findViewById(R.id.tabs);
         viewPager=findViewById(R.id.view_pager);
+        viewPager.setAdapter(new RequestRepStateAdapter(this));
         TabLayoutMediator tabLayoutMediator= new TabLayoutMediator(tabLayout,viewPager, (tab, position)->{
             if (position==0)
                 tab.setText("Sent Requests");

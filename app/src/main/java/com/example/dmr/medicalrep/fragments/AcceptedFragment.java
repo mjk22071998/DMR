@@ -52,9 +52,9 @@ public class AcceptedFragment extends Fragment {
         firestore=FirebaseFirestore.getInstance();
         sharedPreferences=getActivity().getSharedPreferences("File",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
-            task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
+            task = firestore.collection("Requests").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
         } else {
-            task = firestore.collection("Request").whereEqualTo("to", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
+            task = firestore.collection("Requests").whereEqualTo("to", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Accepted").get();
         }
         task.addOnSuccessListener(queryDocumentSnapshots -> {
             requests=queryDocumentSnapshots.toObjects(Request.class);

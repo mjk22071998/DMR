@@ -1,7 +1,6 @@
 package com.example.dmr.medicalrep.fragments;
 
 import android.app.ProgressDialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -47,7 +46,7 @@ public class SentFragment extends Fragment {
         progressDialog=new ProgressDialog(getContext());
         progressDialog.show();
         firestore=FirebaseFirestore.getInstance();
-        firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Sent").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firestore.collection("Requests").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Sent").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 requests=queryDocumentSnapshots.toObjects(Request.class);

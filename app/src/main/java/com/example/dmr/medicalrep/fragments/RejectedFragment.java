@@ -51,9 +51,9 @@ public class RejectedFragment extends Fragment {
         firestore=FirebaseFirestore.getInstance();
         sharedPreferences=getActivity().getSharedPreferences("File",MODE_PRIVATE);
         if (sharedPreferences.getBoolean("rep",false)) {
-            task = firestore.collection("Request").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Rejected").get();
+            task = firestore.collection("Requests").whereEqualTo("from", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Rejected").get();
         } else {
-            task = firestore.collection("Request").whereEqualTo("to", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Rejected").get();
+            task = firestore.collection("Requests").whereEqualTo("to", SessionManager.getUser(getContext()).get(SessionManager.CNIC).toString()).whereEqualTo("status","Rejected").get();
         }
         task.addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override

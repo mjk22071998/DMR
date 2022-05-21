@@ -51,6 +51,7 @@ public class SearchDoctorsActivity extends AppCompatActivity {
                         Intent intent=new Intent(SearchDoctorsActivity.this,SendRequestActivity.class);
                         intent.putExtra("docName", doctors.get(position).getFullName());
                         intent.putExtra("docCNIC", doctors.get(position).getCNIC());
+                        intent.putExtra("docToken", doctors.get(position).getToken());
                         startActivity(intent);
                     }
                 });

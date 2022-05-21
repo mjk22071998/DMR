@@ -31,6 +31,7 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.HashMap;
@@ -123,7 +124,17 @@ public class SignUpRepActivity extends AppCompatActivity {
                                                                             editor.putBoolean("rep",true);
                                                                             editor.apply();
                                                                             Toast.makeText(SignUpRepActivity.this, "A verification email has been sent", Toast.LENGTH_SHORT).show();
-                                                                            startActivity(new Intent(SignUpRepActivity.this,LoginActivity.class));
+                                                                            FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+                                                                                @Override
+                                                                                public void onSuccess(String s) {
+                                                                                    reference.document(email).update("token",s).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                        @Override
+                                                                                        public void onSuccess(Void unused) {
+                                                                                            startActivity(new Intent(SignUpRepActivity.this,LoginActivity.class));
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            });
                                                                         }
                                                                     }).addOnFailureListener(new OnFailureListener() {
                                                                         @Override

@@ -61,4 +61,9 @@ public class SessionManager {
         editor.putString(PHONE_NUMBER,"");
         editor.apply();
     }
+
+    public static String getToken(Context context) {
+        SharedPreferences sharepref=context.getSharedPreferences("MyFile", Context.MODE_PRIVATE);
+        return sharepref.getString(TOKEN,null);
+    }
 }

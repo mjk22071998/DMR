@@ -19,6 +19,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +34,7 @@ public class SendRequestActivity extends AppCompatActivity {
     Button sendRequest,addMed;
     List<Medicine> medicines;
     RecyclerView meds;
-    String docName,docCNIC;
+    String docName,docCNIC,docToken;
     Map<String, Object> data;
     MedicineAdapter adapter;
     ProgressDialog progressDialog;
@@ -70,6 +72,11 @@ public class SendRequestActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         progressDialog.dismiss();
+                        Map<String,String> map=new HashMap<>();
+                        map.put("title","Request from " + SessionManager.getUser(getApplicationContext()).get(SessionManager.FULL_NAME).toString());
+                        map.put("body","You have a new Request");
+                        RemoteMessage remoteMessage=new RemoteMessage.Builder(docToken).setData(map).build();
+                        FirebaseMessaging.getInstance().send(remoteMessage);
                         startActivity(new Intent(SendRequestActivity.this,RequestsRepActivity.class));
                         finish();
                     }
@@ -103,6 +110,7 @@ public class SendRequestActivity extends AppCompatActivity {
         description=findViewById(R.id.medDesc);
         docName=getIntent().getStringExtra("docName");
         docCNIC=getIntent().getStringExtra("docCNIC");
+        docToken=getIntent().getStringExtra("docToken");
         data=new HashMap<>();
         meds=findViewById(R.id.meds);
         sendRequest=findViewById(R.id.sendRequest);

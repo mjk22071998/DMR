@@ -46,6 +46,12 @@ public class DashboardDoctorActivity extends AppCompatActivity {
                 startActivity(new Intent(DashboardDoctorActivity.this, RequestDocActivity.class));
             }
         });
+        messages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardDoctorActivity.this, ChatActivity.class));
+            }
+        });
     }
     void init(){
         request=findViewById(R.id.request);

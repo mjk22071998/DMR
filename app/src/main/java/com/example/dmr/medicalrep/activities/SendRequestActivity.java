@@ -66,6 +66,8 @@ public class SendRequestActivity extends AppCompatActivity {
                 data.put("timestamp", Timestamp.now());
                 data.put("status","Sent");
                 data.put("docName",docName);
+                data.put("repToken",SessionManager.getToken(getApplicationContext()));
+                data.put("docToken",docToken);
                 data.put("repName",SessionManager.getUser(getApplicationContext()).get(SessionManager.FULL_NAME).toString());
                 data.put("medicines",medicines);
                 firestore.collection("Requests").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

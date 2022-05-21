@@ -1,6 +1,7 @@
 package com.example.dmr.medicalrep.fragments;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dmr.medicalrep.R;
+import com.example.dmr.medicalrep.activities.MessagesActivity;
 import com.example.dmr.medicalrep.adapters.NewRequestAdapter;
 import com.example.dmr.medicalrep.adapters.RequestAdapter;
 import com.example.dmr.medicalrep.model.Request;
@@ -96,6 +98,16 @@ public class NewFragment extends Fragment {
                         e.printStackTrace();
                     }
                 });
+            }
+        });
+        adapter.setOnMessageClickListener(new NewRequestAdapter.OnMessageClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent=new Intent(getContext(), MessagesActivity.class);
+                intent.putExtra("CNIC",requests.get(position).getFrom());
+                intent.putExtra("token",requests.get(position).getRepToken());
+                intent.putExtra("name",requests.get(position).getRepName());
+                startActivity(intent);
             }
         });
         adapter.setOnRejectClickListener(new NewRequestAdapter.OnRejectClickListener() {

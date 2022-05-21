@@ -40,6 +40,12 @@ public class DashboardRepActivity extends AppCompatActivity{
                 finishAffinity();
             }
         });
+        messages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardRepActivity.this, ChatActivity.class));
+            }
+        });
         sendRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,9 +22,15 @@ public class NewRequestAdapter extends RecyclerView.Adapter<NewRequestAdapter.Ne
     Context context;
     OnAcceptClickListener onAcceptClickListener;
     OnRejectClickListener onRejectClickListener;
+    OnMessageClickListener onMessageClickListener;
+
 
     public void setOnAcceptClickListener(OnAcceptClickListener onAcceptClickListener) {
         this.onAcceptClickListener = onAcceptClickListener;
+    }
+
+    public void setOnMessageClickListener(OnMessageClickListener onMessageClickListener) {
+        this.onMessageClickListener = onMessageClickListener;
     }
 
     public void setOnRejectClickListener(OnRejectClickListener onRejectClickListener) {
@@ -43,11 +49,15 @@ public class NewRequestAdapter extends RecyclerView.Adapter<NewRequestAdapter.Ne
         void onClick(int position);
     }
 
+    public interface OnMessageClickListener{
+        void onClick(int position);
+    }
+
     @NonNull
     @Override
     public NewRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context= parent.getContext();
-        return new NewRequestViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_request,parent,false));
+        return new NewRequestViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_new_request,parent,false));
     }
 
     @Override
@@ -68,7 +78,7 @@ public class NewRequestAdapter extends RecyclerView.Adapter<NewRequestAdapter.Ne
 
     public class NewRequestViewHolder extends RecyclerView.ViewHolder{
         TextView to,from,time;
-        Button accept,reject;
+        Button accept,reject,message;
         RecyclerView meds;
 
         public NewRequestViewHolder(@NonNull View itemView) {
@@ -79,6 +89,7 @@ public class NewRequestAdapter extends RecyclerView.Adapter<NewRequestAdapter.Ne
             meds=itemView.findViewById(R.id.meds);
             accept=itemView.findViewById(R.id.accept);
             reject=itemView.findViewById(R.id.reject);
+            message=itemView.findViewById(R.id.message);
             accept.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -89,6 +100,12 @@ public class NewRequestAdapter extends RecyclerView.Adapter<NewRequestAdapter.Ne
                 @Override
                 public void onClick(View view) {
                     onRejectClickListener.onClick(getAdapterPosition());
+                }
+            });
+            message.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onMessageClickListener.onClick(getAdapterPosition());
                 }
             });
         }

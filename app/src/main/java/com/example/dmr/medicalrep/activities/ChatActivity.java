@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -72,7 +73,17 @@ public class ChatActivity extends AppCompatActivity {
         adapter.setOnChatClickListener(new ChatAdapter.OnChatClickListener() {
             @Override
             public void onClick(int position) {
-                //TODO: Later
+                Intent intent=new Intent(getApplicationContext(),MessagesActivity.class);
+                if (rep){
+                    intent.putExtra("CNIC",chats.get(position).getDocCNIC());
+                    intent.putExtra("token",chats.get(position).getDocToken());
+                    intent.putExtra("name",chats.get(position).getDocName());
+                } else {
+                    intent.putExtra("CNIC",chats.get(position).getRepCNIC());
+                    intent.putExtra("token",chats.get(position).getRepToken());
+                    intent.putExtra("name",chats.get(position).getRepName());
+                }
+                startActivity(intent);
             }
         });
     }

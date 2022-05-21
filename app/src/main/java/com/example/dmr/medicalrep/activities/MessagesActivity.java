@@ -2,6 +2,7 @@ package com.example.dmr.medicalrep.activities;
 
 import static com.example.dmr.medicalrep.utils.SessionManager.CNIC;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +22,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -113,12 +116,12 @@ public class MessagesActivity extends AppCompatActivity {
         });
     }
     void getData(){
-        firestore.collection("chats").document(id).collection("messages").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firestore.collection("chats").document(id).collection("messages").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                if (queryDocumentSnapshots!=null){
-                    if (queryDocumentSnapshots.isEmpty()||queryDocumentSnapshots.size()==0){
-                        for (QueryDocumentSnapshot queryDocumentSnapshot:queryDocumentSnapshots){
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value!=null){
+                    if (value.isEmpty()||value.size()==0){
+                        for (QueryDocumentSnapshot queryDocumentSnapshot:value){
                             messages.add(queryDocumentSnapshot.toObject(Message.class));
                         }
                         adapter.notifyDataSetChanged();

@@ -41,7 +41,7 @@ public class SelectUserActivity extends AppCompatActivity {
                 if (reg){
                     startActivity(new Intent(SelectUserActivity.this, SignUpDocActivity.class));
                 } else{
-                    startActivity(new Intent(SelectUserActivity.this,LoginActivity.class));
+                    startActivity(new Intent(SelectUserActivity.this, LoginActivity.class));
                 }
 
             }

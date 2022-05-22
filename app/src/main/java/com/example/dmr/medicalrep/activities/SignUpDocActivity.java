@@ -135,10 +135,7 @@ public class SignUpDocActivity extends AppCompatActivity {
                                         .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                                             @Override
                                             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                                                authResult.getUser().sendEmailVerification();
                                                 startActivity(new Intent(SignUpDocActivity.this,LoginActivity.class));
-                                                auth.signOut();
-                                                progressDialog.dismiss();
                                             }
 
                                             @Override

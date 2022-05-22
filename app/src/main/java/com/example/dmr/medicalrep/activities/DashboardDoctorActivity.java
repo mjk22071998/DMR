@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,11 @@ public class DashboardDoctorActivity extends AppCompatActivity {
         city.setText(SessionManager.getUser(getApplicationContext()).get(CITY).toString());
         logout.setOnClickListener(view -> {
             auth.signOut();
+            SessionManager.deleteUser(getApplicationContext());
+            SharedPreferences sharedPreferences=getSharedPreferences("File",MODE_PRIVATE);
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean("auth",false);
+            editor.apply();
             startActivity(new Intent(DashboardDoctorActivity.this,MainActivity.class));
             finishAffinity();
         });

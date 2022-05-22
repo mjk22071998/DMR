@@ -65,7 +65,7 @@ public class NewRequestAdapter extends RecyclerView.Adapter<NewRequestAdapter.Ne
         MedicineAdapter adapter;
         holder.from.setText(requests.get(position).getRepName());
         holder.to.setText(requests.get(position).getDocName());
-        holder.time.setText(requests.get(position).getTimestamp().toString());
+        holder.time.setText(requests.get(position).getTimestamp().toDate().toString());
         adapter=new MedicineAdapter(requests.get(position).getMedicines());
         holder.meds.setLayoutManager(new LinearLayoutManager(context));
         holder.meds.setAdapter(adapter);
